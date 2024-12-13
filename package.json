@@ -1,5 +1,5 @@
 {
-  "name": "@accrual/authkit-remix",
+  "name": "@accrual-dev/authkit-remix",
   "version": "0.7.10",
   "description": "Authentication and session helpers for using WorkOS & AuthKit with Remix",
   "sideEffects": false,
@@ -40,10 +40,6 @@
     "typescript-eslint": "^7.2.0"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/accrual/authkit-remix.git"
-  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   }
