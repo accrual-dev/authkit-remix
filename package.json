@@ -1,6 +1,6 @@
 {
-  "name": "@workos-inc/authkit-remix",
-  "version": "0.7.1",
+  "name": "@accrual/authkit-remix",
+  "version": "0.7.10",
   "description": "Authentication and session helpers for using WorkOS & AuthKit with Remix",
   "sideEffects": false,
   "type": "commonjs",
@@ -40,12 +40,11 @@
     "typescript-eslint": "^7.2.0"
   },
   "license": "MIT",
-  "homepage": "https://github.com/workos/authkit-remix#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/workos/authkit-remix.git"
+    "url": "git+https://github.com/accrual/authkit-remix.git"
   },
-  "bugs": {
-    "url": "https://github.com/workos/authkit-remix/issues"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
