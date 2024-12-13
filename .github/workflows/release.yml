@@ -20,7 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@accrual'
 
       - name: Install Dependencies
         run: |
@@ -35,11 +36,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --tag latest --access=public
+          npm publish --tag latest
 
       - name: Push Pre-Release
         if: ${{ github.event.release.prerelease }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --tag next --access=public
+          npm publish --tag next
