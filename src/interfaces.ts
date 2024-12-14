@@ -42,6 +42,7 @@ export interface GetAuthURLOptions {
 export interface AuthKitLoaderOptions {
   ensureSignedIn?: boolean;
   debug?: boolean;
+  completeUrl?: boolean;
 }
 
 export interface AuthorizedData {

@@ -111,14 +111,14 @@ async function authkitLoader<Data = unknown>(
   options: AuthKitLoaderOptions = {},
 ) {
   const loader = typeof loaderOrOptions === 'function' ? loaderOrOptions : undefined;
-  const { ensureSignedIn = false, debug = false } = typeof loaderOrOptions === 'object' ? loaderOrOptions : options;
+  const { ensureSignedIn = false, debug = false, completeUrl = false } = typeof loaderOrOptions === 'object' ? loaderOrOptions : options;
 
   const { request } = loaderArgs;
   const session = await updateSession(request, debug);
 
   if (!session) {
     if (ensureSignedIn) {
-      const returnPathname = getReturnPathname(request.url);
+      const returnPathname = completeUrl ? request.url : getReturnPathname(request.url);
       const cookieSession = await getSession(request.headers.get('Cookie'));
 
       throw redirect(await getAuthorizationUrl({ returnPathname }), {
