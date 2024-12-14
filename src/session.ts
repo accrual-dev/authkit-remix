@@ -1,7 +1,7 @@
 import { json, redirect } from '@remix-run/node';
 import type { LoaderFunctionArgs, SessionData, TypedResponse } from '@remix-run/node';
 import { WORKOS_CLIENT_ID, WORKOS_COOKIE_PASSWORD } from './env-variables.js';
-import type { AccessToken, AuthorizedData, UnauthorizedData, AuthKitLoaderOptions, Session } from './interfaces.js';
+import type { AccessToken, AuthorizedData, UnauthorizedData, AuthKitLoaderOptions, SignedInLoaderOptions, Session } from './interfaces.js';
 import { getSession, destroySession, commitSession } from './cookie.js';
 import { getAuthorizationUrl } from './get-authorization-url.js';
 import { workos } from './workos.js';
@@ -85,19 +85,19 @@ type AuthorizedAuthLoader<Data> = (args: LoaderFunctionArgs & { auth: Authorized
 
 async function authkitLoader(
   loaderArgs: LoaderFunctionArgs,
-  options: AuthKitLoaderOptions & { ensureSignedIn: true },
+  options: SignedInLoaderOptions,
 ): Promise<TypedResponse<AuthorizedData>>;
+
+async function authkitLoader<Data = unknown>(
+  loaderArgs: LoaderFunctionArgs,
+  loader: AuthorizedAuthLoader<Data>,
+  options: SignedInLoaderOptions,
+): Promise<TypedResponse<Data & AuthorizedData>>;
 
 async function authkitLoader(
   loaderArgs: LoaderFunctionArgs,
   options?: AuthKitLoaderOptions,
 ): Promise<TypedResponse<AuthorizedData | UnauthorizedData>>;
-
-async function authkitLoader<Data = unknown>(
-  loaderArgs: LoaderFunctionArgs,
-  loader: AuthorizedAuthLoader<Data>,
-  options: AuthKitLoaderOptions & { ensureSignedIn: true },
-): Promise<TypedResponse<Data & AuthorizedData>>;
 
 async function authkitLoader<Data = unknown>(
   loaderArgs: LoaderFunctionArgs,
@@ -107,7 +107,7 @@ async function authkitLoader<Data = unknown>(
 
 async function authkitLoader<Data = unknown>(
   loaderArgs: LoaderFunctionArgs,
-  loaderOrOptions?: AuthLoader<Data> | AuthorizedAuthLoader<Data> | AuthKitLoaderOptions,
+  loaderOrOptions?: AuthLoader<Data> | AuthorizedAuthLoader<Data> | AuthKitLoaderOptions | SignedInLoaderOptions,
   options: AuthKitLoaderOptions = {},
 ) {
   const loader = typeof loaderOrOptions === 'function' ? loaderOrOptions : undefined;

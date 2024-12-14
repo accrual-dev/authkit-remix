@@ -45,6 +45,10 @@ export interface AuthKitLoaderOptions {
   completeUrl?: boolean;
 }
 
+export interface SignedInLoaderOptions extends AuthKitLoaderOptions {
+  ensureSignedIn: true;
+}
+
 export interface AuthorizedData {
   user: User;
   sessionId: string;
