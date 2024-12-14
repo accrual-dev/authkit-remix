@@ -1,6 +1,6 @@
 {
   "name": "@accrual-dev/authkit-remix",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "description": "Authentication and session helpers for using WorkOS & AuthKit with Remix",
   "sideEffects": false,
   "type": "commonjs",
